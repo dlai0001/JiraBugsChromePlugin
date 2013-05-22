@@ -52,7 +52,7 @@ function matchComponents() {
 function getBugs() {
 	for (var i=0; i<matchedComponents.length; i++) {
 		var queryUrl = JiraSettings.jiraUrl + 
-			"/rest/api/2/search?jql=project%20%3D%20WIREDRIVE%20" + 
+			"/rest/api/2/search?jql=project%20%3D%20" + JiraSettings.projectName + "%20" + 
 			"AND%20issuetype%20%3D%20Bug%20AND%20status%20!%3D%20Closed%20" + 
 			"AND%20component='" + matchedComponents[i] + "'";
 		
@@ -60,10 +60,12 @@ function getBugs() {
 			console.log(data);
 			try {
 				for(var j=0; j<data.issues.length; j++) {
-					console.log(data.issues[j].fields.summary);
+					console.log(data.issues[j]);
+					
 					//Add links and description of issues to the display.
+					var url = JiraSettings.jiraUrl + "/browse/" + data.issues[j].key;
 					$("<li>"
-					+ "<a href=\"" + "#" + "\">"
+					+ "<a target=\"_blank\" href=\"" + url + "\">"
 					+ data.issues[j].fields.summary 
 					+ "</a>"
 					+ "</li>").appendTo("#buglist");
