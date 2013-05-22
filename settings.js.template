@@ -1,0 +1,4 @@
+window.JiraSettings = {
+	jiraUrl: 'http://jira.yourjira.location',
+	projectName:'YOURPROJECTNAME'
+}
